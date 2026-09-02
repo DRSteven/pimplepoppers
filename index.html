@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Pimple Poppers - de IT- en supportpartner voor animatieproductiehuizen in Belgie.">
+<title>Pimple Poppers</title>
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" href="favicon-512.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500&display=swap">
+<style>
+/* Pimple Poppers — committed black world. The logo is split at its own black/white
+   boundary: the splat half sits on a full-bleed white band, the wordmark half on the
+   black page below, so the page reconstructs the logo across the seam. */
+:root{
+  --black:#000000;        /* must equal the logo halves' ground exactly, or the seam shows */
+  --white:#FFFFFF;
+  --text:#F2EFEA;
+  --muted:#9C9691;
+  --rule:#262626;
+  --rule-soft:#1A1A1A;
+  --accent:#FF2E86;
+  --accent-ink:#2B0716;
+  --signal:#5BE3A8;
+  --logo-w:min(430px,80vw);
+  --maxw:1080px;
+  --display:"Bricolage Grotesque","Trebuchet MS",system-ui,sans-serif;
+  --body:"IBM Plex Sans","Segoe UI",system-ui,sans-serif;
+  --mono:"IBM Plex Mono","Consolas",ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;background:var(--black);color:var(--text);
+  font-family:var(--body);font-size:17px;line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+p{margin:0}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.06}
+h1{font-size:clamp(2.1rem,5.2vw,3.5rem);font-weight:800;letter-spacing:-.022em}
+h2{font-size:clamp(1.5rem,3.2vw,2.2rem);font-weight:800;letter-spacing:-.018em}
+h3{font-size:1.12rem;font-weight:800;letter-spacing:-.01em}
+.eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin:0}
+
+/* ---------- the white band: exactly as tall as the splat half of the logo ---------- */
+.band-white{background:var(--white);display:flex;justify-content:center;line-height:0}
+.band-white img{width:var(--logo-w);height:auto;display:block}
+
+/* ---------- hero = the hover stage ---------- */
+.hero{background:var(--black);position:relative;padding:0 0 84px;text-align:center;min-height:62vh}
+.hero img.wordmark{width:var(--logo-w);height:auto;display:block;margin:0 auto}
+.hero h1{max-width:15em;margin:34px auto 0}
+.hero .lede{margin:22px auto 0;max-width:37em;color:var(--muted);font-size:1.05rem}
+.cta-row{display:flex;flex-wrap:wrap;gap:13px;margin-top:30px;justify-content:center}
+
+/* Reveal-on-hover, rebuilt from the pattern on pimpleproductions.com:
+   hidden children sit at opacity 0 with a small transform and tween over .5s ease-in-out. */
+.reveal{opacity:0;pointer-events:none;transition:opacity .5s ease-in-out,transform .5s ease-in-out}
+.reveal.center{transform:scale(.8)}
+.reveal.up{transform:translateY(16px)}
+.hero:hover .reveal,
+.hero:focus-within .reveal{opacity:1;pointer-events:auto;transform:none}
+
+.hint{
+  position:absolute;left:0;right:0;bottom:38px;margin:0;
+  font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+  color:#4A4643;transition:opacity .4s ease-out;
+}
+.hero:hover .hint,.hero:focus-within .hint{opacity:0}
+
+/* No hover (touch): show everything, exactly as their site does for mobile. */
+@media (hover:none){
+  .reveal{opacity:1;pointer-events:auto;transform:none}
+  .hint{display:none}
+  .hero{min-height:0;padding-top:0}
+}
+@media (prefers-reduced-motion:reduce){
+  .reveal{transition:opacity .25s linear}
+  .reveal.center,.reveal.up{transform:none}
+}
+
+.btn{
+  display:inline-flex;align-items:center;gap:9px;padding:14px 26px;
+  font-family:var(--mono);font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;
+  text-decoration:none;border:2px solid transparent;
+  transition:background .18s,color .18s,border-color .18s;
+}
+.btn-primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);font-weight:500}
+.btn-primary:hover,.btn-primary:focus-visible{background:var(--white);border-color:var(--white);color:var(--black)}
+.btn-ghost{border-color:var(--rule);color:var(--text)}
+.btn-ghost:hover,.btn-ghost:focus-visible{border-color:var(--white);background:var(--white);color:var(--black)}
+
+/* ---------- status strip ---------- */
+.status{border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.status .wrap{display:flex;flex-wrap:wrap;align-items:center;gap:12px 34px;padding-top:18px;padding-bottom:18px}
+.status .live{display:flex;align-items:center;gap:9px;font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--signal)}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--signal);box-shadow:0 0 0 0 rgba(91,227,168,.6);animation:pulse 2.6s ease-out infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 8px rgba(91,227,168,0)}100%{box-shadow:0 0 0 0 rgba(91,227,168,0)}}
+@media(prefers-reduced-motion:reduce){.dot{animation:none}}
+.metrics{display:flex;flex-wrap:wrap;gap:10px 32px;margin-left:auto}
+.metric{font-family:var(--mono);font-size:11.5px;color:var(--muted);font-variant-numeric:tabular-nums}
+.metric b{color:var(--text);font-weight:500}
+
+/* ---------- bands ---------- */
+section.band{padding:76px 0}
+.band + .band{border-top:1px solid var(--rule-soft)}
+.band-head{max-width:42em}
+.band-head h2{margin-top:12px}
+.band-head p{margin-top:16px;color:var(--muted)}
+
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:42px;border-top:2px solid var(--rule)}
+@media(max-width:860px){.cards{grid-template-columns:1fr}}
+.card{padding:26px 24px 30px;border-bottom:2px solid var(--rule);border-right:1px solid var(--rule-soft);display:flex;flex-direction:column;gap:10px}
+.cards .card:last-child{border-right:none}
+@media(max-width:860px){.card{border-right:none}}
+.card .ref{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--accent)}
+.card p{color:var(--muted);font-size:.95rem}
+
+.reason-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px 44px;margin-top:40px}
+@media(max-width:760px){.reason-grid{grid-template-columns:1fr}}
+.reason{display:flex;gap:16px;align-items:flex-start}
+.reason .n{font-family:var(--mono);font-size:11px;color:var(--accent);letter-spacing:.12em;padding-top:5px;min-width:26px}
+.reason h3{margin-bottom:6px}
+.reason p{color:var(--muted);font-size:.95rem}
+
+/* ---------- closing band ---------- */
+.close-cta{padding:88px 0;position:relative;overflow:hidden;border-top:1px solid var(--rule-soft)}
+.close-cta .splat{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(720px,118%);opacity:.16;pointer-events:none;user-select:none}
+.close-cta .wrap{position:relative;text-align:center;display:flex;flex-direction:column;align-items:center;gap:20px}
+.close-cta h2{max-width:15em}
+.close-cta p{color:var(--muted);max-width:36em}
+
+footer{border-top:1px solid var(--rule);padding:26px 0;color:#6E6864}
+footer .wrap{display:flex;flex-wrap:wrap;gap:12px 28px;align-items:center;justify-content:space-between;font-family:var(--mono);font-size:11.5px}
+footer a{color:var(--muted);text-decoration:none}
+footer a:hover,footer a:focus-visible{color:var(--accent)}
+</style>
+</head>
+<body>
+<div class="band-white">
+  <img src="logo-top.png" alt="">
+</div>
+
+<section class="hero">
+  <img class="wordmark reveal center" src="logo-bottom.png" alt="Pimple Poppers">
+  <div class="wrap">
+    <h1 class="reveal up">De beste IT-partner voor animatiestudio's in België.</h1>
+    <p class="lede reveal up">Wij verzorgen de volledige technische ondersteuning van animatieproductiehuizen: renderfarms, kleurcontinuïteit, hardware, en het volledige beheer van katten in productie. Eén desk, alles erin — en u hoeft hem niet correct te gebruiken.</p>
+    <div class="cta-row reveal up">
+      <!-- SUPPORT DESK URL — one value to change when the desk moves -->
+      <a class="btn btn-primary" href="https://pimplepoppers.zohodesk.eu/portal/nl/home">Naar de support desk →</a>
+      <a class="btn btn-ghost" href="#diensten">Wat wij doen</a>
+    </div>
+  </div>
+  <p class="hint">beweeg je cursor over de puist</p>
+</section>
+
+<div class="status">
+  <div class="wrap">
+    <span class="live"><span class="dot"></span> Alle systemen operationeel</span>
+    <div class="metrics">
+      <span class="metric">Responstijd <b>onmiddellijk</b></span>
+      <span class="metric">Opgeloste tickets <b>alle</b></span>
+      <span class="metric">Katten in productie <b>1</b></span>
+      <span class="metric">Openstaande midgetgolf-geschillen <b>3</b></span>
+    </div>
+  </div>
+</div>
+
+<section class="band" id="diensten">
+  <div class="wrap">
+    <div class="band-head">
+      <p class="eyebrow">Diensten</p>
+      <h2>Wij dekken alles wat er tijdens een productie fout kan gaan.</h2>
+      <p>Onze dienstverlening is opgebouwd rond de incidenten die zich in een animatiestudio werkelijk voordoen. Elk van onderstaande categorieën is volledig gedocumenteerd in onze kennisbank.</p>
+    </div>
+    <div class="cards">
+      <article class="card">
+        <span class="ref">PP-404</span>
+        <h3>Provisioning &amp; dierbeheer</h3>
+        <p>Uitrol, monitoring en herstel van katten in productie. Inclusief onaangekondigde wekmomenten en katten die buiten het onderhoudsvenster opereren.</p>
+      </article>
+      <article class="card">
+        <span class="ref">PP-808</span>
+        <h3>Kleur &amp; continuïteit</h3>
+        <p>Wanneer het oranje niet klopt, lossen wij dat op. Streepjescontinuïteit wordt bewaakt over de volledige productie, per frame indien nodig.</p>
+      </article>
+      <article class="card">
+        <span class="ref">PP-500</span>
+        <h3>Migratie &amp; ontmanteling</h3>
+        <p>Wij nemen over van uw vorige IT-leverancier en zorgen ervoor dat die stopt met antwoorden. De oude helpdesk wordt netjes buiten gebruik gesteld.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="waarom">
+  <div class="wrap">
+    <div class="band-head">
+      <p class="eyebrow">Waarom Pimple Poppers</p>
+      <h2>Andere leveranciers beloven een oplossing. Wij hebben er al één ingepland.</h2>
+    </div>
+    <div class="reason-grid">
+      <div class="reason">
+        <span class="n">01</span>
+        <div>
+          <h3>Wij kennen de sector</h3>
+          <p>Wij begrijpen dat "bijna klaar" een technische status is, geen inschatting. Onze escalatiematrix houdt daar rekening mee.</p>
+        </div>
+      </div>
+      <div class="reason">
+        <span class="n">02</span>
+        <div>
+          <h3>Wij luisteren naar feedback</h3>
+          <p>Wij hebben uitzonderlijk lang naar uw feedback over ticketsystemen geluisterd en zijn tot de conclusie gekomen dat het probleem nooit de tickets waren.</p>
+        </div>
+      </div>
+      <div class="reason">
+        <span class="n">03</span>
+        <div>
+          <h3>Wij zijn er vóór u belt</h3>
+          <p>Onze gemiddelde responstijd is onmiddellijk. In een aantal geregistreerde gevallen was ze negatief.</p>
+        </div>
+      </div>
+      <div class="reason">
+        <span class="n">04</span>
+        <div>
+          <h3>Wij documenteren alles</h3>
+          <p>Zesendertig artikelen, twee talen, één kennisbank. Van wachtwoordbeleid tot de aanbevolen bedelving onder puppy's.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="close-cta">
+  <img class="splat" src="splat-invert.png" alt="">
+  <div class="wrap">
+    <p class="eyebrow">Support</p>
+    <h2>Uw ticket is al bijna opgelost.</h2>
+    <p>De support desk staat open voor alle medewerkers van de productie. Renderfarm in brand, kat gedraagt zich verdacht, of discussie over de score op de midgetgolf — het hoort allemaal hier thuis.</p>
+    <!-- SUPPORT DESK URL -->
+    <a class="btn btn-primary" href="https://pimplepoppers.zohodesk.eu/portal/nl/home">Dien een ticket in →</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>Pimple Poppers — IT &amp; Support voor animatieproductie</span>
+    <!-- SUPPORT DESK URL -->
+    <span><a href="https://pimplepoppers.zohodesk.eu/portal/nl/home">Support desk</a> · pimplepoppers.be</span>
+  </div>
+</footer>
+
+</body>
+</html>

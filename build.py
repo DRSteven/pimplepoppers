@@ -5,6 +5,10 @@ import base64, io
 DESK = "https://pimplepoppers.zohodesk.eu/portal/nl/home"
 # -> "https://support.pimplepoppers.be/portal/nl/home"
 
+SITE = "https://pimplepoppers.be/"
+BLURB = ("Wij verzorgen de volledige technische ondersteuning van animatieproductiehuizen: "
+         "renderfarms, kleurcontinuïteit, hardware, en het volledige beheer van katten in productie.")
+
 def datauri(path):
     return "data:image/png;base64," + base64.b64encode(open(path, 'rb').read()).decode('ascii')
 
@@ -28,10 +32,31 @@ head = head.replace('<title>Pimple Poppers</title>',
                     '<title>Pimple Poppers</title>\n'
                     '<link rel="icon" href="favicon.ico" sizes="any">\n'
                     '<link rel="icon" href="favicon-512.png" type="image/png">')
+DESCRIPTION = "Pimple Poppers - de IT- en supportpartner voor animatieproductiehuizen in Belgie."
+
+# Link-preview card (WhatsApp / Slack / iMessage / Facebook) + one canonical address, so
+# www / http / tracking-suffixed variants all resolve to the same page.
+social = (f'<link rel="canonical" href="{SITE}">\n'
+          '<meta property="og:type" content="website">\n'
+          '<meta property="og:site_name" content="Pimple Poppers">\n'
+          f'<meta property="og:url" content="{SITE}">\n'
+          '<meta property="og:title" content="Pimple Poppers">\n'
+          f'<meta property="og:description" content="{BLURB}">\n'
+          f'<meta property="og:image" content="{SITE}og-card.png">\n'
+          '<meta property="og:image:width" content="1200">\n'
+          '<meta property="og:image:height" content="630">\n'
+          '<meta property="og:image:alt" content="Het Pimple Poppers-logo: de splat op wit, '
+          'het woordmerk op zwart.">\n'
+          '<meta property="og:locale" content="nl_BE">\n'
+          '<meta name="twitter:card" content="summary_large_image">\n'
+          '<meta name="twitter:title" content="Pimple Poppers">\n'
+          f'<meta name="twitter:description" content="{BLURB}">\n'
+          f'<meta name="twitter:image" content="{SITE}og-card.png">')
+
 doc = ('<!doctype html>\n<html lang="nl">\n<head>\n<meta charset="utf-8">\n'
        '<meta name="viewport" content="width=device-width, initial-scale=1">\n'
-       '<meta name="description" content="Pimple Poppers - de IT- en supportpartner voor '
-       'animatieproductiehuizen in Belgie.">\n'
+       f'<meta name="description" content="{DESCRIPTION}">\n'
+       f'{social}\n'
        f'{head}\n</head>\n<body>\n{markup}\n</body>\n</html>\n')
 io.open('index.html', 'w', encoding='utf-8').write(doc)
 
